@@ -1,6 +1,6 @@
 # Antigravity 团队接入指南
 
-跟着以下 4 步操作，为你的电脑配置团队 AI 协作环境。
+跟着以下 3 步操作，为你的电脑配置团队 AI 协作环境。
 
 ---
 
@@ -27,33 +27,33 @@
 
 ---
 
-## Step 3. 拉取团队项目
+## Step 3. 拉取项目 & 一键配置
 
-打开终端（macOS: `Terminal` / Windows: `PowerShell`），执行：
+登录成功后，在 IDE 右侧对话框中**依次操作以下 3 小步**：
 
-```shell
-cd ~/Desktop
-git clone https://github.com/Albertsun6/AntigravityOnboard.git
+### 3.1 发送第一句话，让 AI 帮你下载项目
+
+复制以下内容发送：
+
+```text
+请帮我把团队项目克隆到桌面：git clone https://github.com/Albertsun6/AntigravityOnboard.git ~/Desktop/AntigravityOnboard
 ```
 
-然后在 Antigravity IDE 中点击 **Open Folder**，选择桌面上的 `AntigravityOnboard` 文件夹打开。
+等 AI 执行完毕，你的桌面上会多出一个 `AntigravityOnboard` 文件夹。
 
-> [!TIP]
-> 如果提示 `git: command not found`，需先安装 Git：
-> - macOS：终端执行 `xcode-select --install`
-> - Windows：前往 [https://git-scm.com](https://git-scm.com) 下载安装
+### 3.2 在 IDE 中打开项目
 
----
+点击 IDE 左上角 **File → Open Folder**，选择桌面上的 `AntigravityOnboard` 文件夹，点击确认。
 
-## Step 4. 执行 Onboard 口令
+### 3.3 发送第二句话，一键完成环境配置
 
-在 IDE 右侧对话框中输入以下内容并发送：
+项目打开后，在右侧对话框中发送：
 
 ```text
 请帮我执行团队的 /onboard 流程
 ```
 
-系统将自动完成环境配置：全局规则注入、安全沙盒创建、技能引擎加载、知识库挂载。
+系统将自动完成：全局规则注入、安全沙盒创建、技能引擎加载、知识库挂载。
 
 **看到 ✅ 全绿验证报告 = 配置完成，可以开始工作。**
 
