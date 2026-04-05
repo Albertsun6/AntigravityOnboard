@@ -35,10 +35,10 @@ graph TD
 > 1. 请确保你已经下载安装了 **Google Antigravity IDE**。
 > 2. **克隆项目主线代码**：在终端执行以下命令，将远程仓库（此代码库）拉取到你的电脑本地。请将占位符替换为实际的 Git 地址：
 >    ```bash
->    git clone <YOUR_REPO_URL> Antigravityknowhow
->    cd Antigravityknowhow
+>    git clone https://github.com/Albertsun6/AntigravityOnboard.git
+>    cd AntigravityOnboard
 >    ```
-> 3. 在 Google Antigravity IDE 中，点击 `Open Folder`，选择刚刚克隆的 `Antigravityknowhow` 文件夹将其打开。
+> 3. 在 Google Antigravity IDE 中，点击 `Open Folder`，选择刚刚克隆的 `AntigravityOnboard` 文件夹将其打开。
 
 ### 🔹 Step 1. 唤醒系统
 在 IDE 右侧的对话窗内，无需寒暄，无需铺垫，直接原封不动地向大模型输入这句魔法字符：
