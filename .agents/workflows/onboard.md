@@ -21,15 +21,15 @@ echo "✅ 沙盒目录就绪"
 
 ## Step 2: 全局 Soul Rules 部署
 
-检测 `~/.gemini/GEMINI.md`：不存在 → 部署模板 + 交互式个性化；已存在 → 跳过。
+检测 `~/.gemini/GEMINI.md` 是否已有 Soul 内容（IDE 安装后会生成空文件，所以检查内容而非存在性）：
 
 ```bash
-if [ ! -f ~/.gemini/GEMINI.md ]; then
+if ! grep -q 'Antigravity OS Kernel' ~/.gemini/GEMINI.md 2>/dev/null; then
   cp .agents/templates/global_rules_template_generic.md ~/.gemini/GEMINI.md
   echo "✅ 全局 Soul Rules 已部署至 ~/.gemini/GEMINI.md"
   echo "⏳ 接下来请回答两个问题以个性化配置..."
 else
-  echo "⏭️ ~/.gemini/GEMINI.md 已存在，跳过部署"
+  echo "⏭️ ~/.gemini/GEMINI.md 已有 Soul 配置，跳过部署"
 fi
 ```
 
@@ -89,7 +89,7 @@ check() {
   fi
 }
 
-check "全局 GEMINI.md 存在" "test -f ~/.gemini/GEMINI.md"
+check "全局 GEMINI.md 有 Soul 内容" "grep -q 'Antigravity OS Kernel' ~/.gemini/GEMINI.md"
 check "占位符已替换" "! grep -q '{{YOUR_NAME}}' ~/.gemini/GEMINI.md"
 check "Skills 目录非空" "ls .agents/skills/ | head -1"
 check ".agents/tmp/ 存在" "test -d .agents/tmp/"

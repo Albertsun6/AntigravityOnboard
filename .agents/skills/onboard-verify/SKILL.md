@@ -23,7 +23,7 @@ description: 团队 Onboarding 验证引擎。检查新成员的 GEMINI.md/Skill
 
 | # | 检查项 | 验证方式 | 通过标准 |
 |---|---|---|---|
-| 1 | 全局 GEMINI.md 存在 | `ls ~/.gemini/GEMINI.md` | 文件存在 |
+| 1 | 全局 GEMINI.md 有 Soul 内容 | `grep 'Antigravity OS Kernel' ~/.gemini/GEMINI.md` | 有匹配 |
 | 1b | 占位符已替换 | `grep '{{YOUR_NAME}}' ~/.gemini/GEMINI.md` | 无匹配（占位符已被替换） |
 | 2 | GEMINI.md 行数 | `wc -l ~/.gemini/GEMINI.md` | ≤ 200 行 |
 | 3 | Skills 目录非空 | `ls .agents/skills/` | ≥ 3 个 Skill |
