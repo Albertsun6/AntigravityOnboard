@@ -1,108 +1,122 @@
 ---
-description: 团队成员 Onboarding 一键配置流程。用于新成员快速接入 Antigravity 协作体系。
+description: 团队成员 Onboarding 一键配置。由用户提示词中的 clone 意图直接触发。
 ---
 
-# /onboard — 团队成员 Onboarding Workflow
+# /onboard — 团队一键挂载工作流
 
-> 为新团队成员一键配置 Antigravity 协作环境，确保 GEMINI.md / Skills / MCP / 心跳 全链路就绪。
+> **触发方式**：用户发送含 "初始化团队项目" + clone 的提示词，AI 识别意图后：
+> 1. 执行 `git clone <url> ./`
+> 2. 直接执行本 Workflow
+>
+> **前提**：当前打开的是空文件夹。
 
-## 前置条件
-- 新成员已安装 Google Antigravity IDE
-- 已 clone 项目仓库到本地
-- 有 `~/.gemini/` 目录写入权限
-
----
-
-## Step 1: 环境探测
-
-检查新成员环境现状：
-
-```bash
-echo "=== Antigravity Onboarding Probe ==="
-echo "1. Global GEMINI.md:" && ls -la ~/.gemini/GEMINI.md 2>/dev/null || echo "   ❌ 不存在"
-echo "2. Project GEMINI.md:" && ls -la GEMINI.md 2>/dev/null || echo "   ⚠️ 不存在（可选）"
-echo "3. Skills 目录:" && ls .agents/skills/ 2>/dev/null || echo "   ❌ 不存在"
-echo "4. MCP 配置:" && ls ~/.gemini/antigravity/mcp_config.json 2>/dev/null || echo "   ⚠️ 不存在"
-echo "5. .agents/tmp/:" && ls -d .agents/tmp/ 2>/dev/null || echo "   ❌ 不存在"
-```
+## Step 1: 沙盒目录建立
 
 // turbo
-
-## Step 2: 全局 GEMINI.md 配置
-
-检查 `~/.gemini/GEMINI.md` 是否存在：
-- **不存在** → 从 `.agents/templates/GEMINI_TEAM.md` 复制过去
-- **已存在** → 跳过（提示用户手动对比合并）
-
-```bash
-if [ ! -f ~/.gemini/GEMINI.md ]; then
-  cp .agents/templates/GEMINI_TEAM.md ~/.gemini/GEMINI.md
-  echo "✅ 已创建全局 GEMINI.md"
-else
-  echo "⚠️ 全局 GEMINI.md 已存在，请手动对比 .agents/templates/GEMINI_TEAM.md"
-fi
-```
-
-## Step 3: 目录结构确认
-
-确保核心目录存在：
 
 ```bash
 mkdir -p .agents/tmp .agents/docs/metrics
-echo "✅ 目录结构已就绪"
+echo "✅ 沙盒目录就绪"
 ```
 
-// turbo
+## Step 2: 全局 Soul Rules 部署
 
-## Step 4: MCP 配置检查
-
-检查 MCP 配置文件：
-- 如果不存在 → 提醒用户配置
-- 如果存在 → 列出已配置的 Server
+检测 `~/.gemini/GEMINI.md`：不存在 → 部署模板 + 交互式个性化；已存在 → 跳过。
 
 ```bash
-if [ -f ~/.gemini/antigravity/mcp_config.json ]; then
-  echo "✅ MCP 配置已找到，已配置 Server:"
-  python3 -c "import json; [print(f'  - {k}') for k in json.load(open('$HOME/.gemini/antigravity/mcp_config.json')).get('mcpServers', {})]" 2>/dev/null || echo "  ⚠️ 解析失败"
+if [ ! -f ~/.gemini/GEMINI.md ]; then
+  cp .agents/templates/global_rules_template_generic.md ~/.gemini/GEMINI.md
+  echo "✅ 全局 Soul Rules 已部署至 ~/.gemini/GEMINI.md"
+  echo "⏳ 接下来请回答两个问题以个性化配置..."
 else
-  echo "⚠️ MCP 配置不存在，如需 PDF 阅读等功能请配置 ~/.gemini/antigravity/mcp_config.json"
+  echo "⏭️ ~/.gemini/GEMINI.md 已存在，跳过部署"
 fi
 ```
 
-## Step 5: 知识库初始化
+**如果部署了新模板**，Agent 须立即向用户提问并执行替换：
 
-确认 Knowledge 目录可访问：
+1. 问用户："你希望 AI 叫你什么？（如：小明、Boss、峰哥）"
+2. 问用户："偏好 AI 输出什么语言？（如：中文、English、日本語）"
+3. 执行替换：
+```bash
+sed -i '' "s/{{YOUR_NAME}}/用户回答1/g" ~/.gemini/GEMINI.md
+sed -i '' "s/{{LANGUAGE}}/用户回答2/g" ~/.gemini/GEMINI.md
+echo "✅ 个性化配置完成"
+```
+
+## Step 3: 环境探测
 
 ```bash
+# MCP 配置
+[ -f ~/.gemini/antigravity/mcp_config.json ] \
+  && echo "✅ MCP 配置就绪" \
+  || echo "ℹ️ 未发现 MCP 配置，纯开发场景可忽略"
+
+# Voice Hook 脚本
+[ -f ~/.gemini/antigravity/scripts/notify_done.sh ] \
+  && echo "✅ 语音通知脚本就绪" \
+  || echo "ℹ️ 未发现 notify_done.sh，语音播报功能不可用"
+
+# Knowledge 目录
 mkdir -p ~/.gemini/antigravity/knowledge
-echo "✅ Knowledge 目录已就绪"
-ls ~/.gemini/antigravity/knowledge/ 2>/dev/null | head -5
+echo "✅ Knowledge 目录挂载"
 ```
+
+## Step 4: 工作区封签
 
 // turbo
 
-## Step 6: 首次心跳
-
-运行首次心跳巡逻验证全链路：
-
-```
-触发 /heartbeat 命令
+```bash
+echo '{"last_heartbeat":"'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'","last_result":"healthy","issues_found":0,"total_runs":1,"history":["Init via /onboard"]}' > .agents/HEARTBEAT_STATE.json
+echo "✅ 封签完毕"
 ```
 
-⚠️ 首次心跳会强制执行（因为 HEARTBEAT_STATE.json 中 last_heartbeat 为 null）。
+## Step 5: 自动验证 + 欢迎词
 
-## Step 7: 验证总结
+执行验证矩阵，确认环境完整性：
 
-运行 `onboard-verify` Skill 进行最终验证，输出 Onboarding 报告。
+```bash
+PASS=0
+TOTAL=0
 
----
+check() {
+  TOTAL=$((TOTAL + 1))
+  if eval "$2" > /dev/null 2>&1; then
+    echo "✅ $1"
+    PASS=$((PASS + 1))
+  else
+    echo "❌ $1"
+  fi
+}
 
-## 完成标准
+check "全局 GEMINI.md 存在" "test -f ~/.gemini/GEMINI.md"
+check "占位符已替换" "! grep -q '{{YOUR_NAME}}' ~/.gemini/GEMINI.md"
+check "Skills 目录非空" "ls .agents/skills/ | head -1"
+check ".agents/tmp/ 存在" "test -d .agents/tmp/"
+check "Workflows 非空" "ls .agents/workflows/ | head -1"
+check "HEARTBEAT.md 存在" "test -f .agents/HEARTBEAT.md"
+check "HEARTBEAT_STATE.json 存在" "test -f .agents/HEARTBEAT_STATE.json"
+check "Knowledge 目录存在" "test -d ~/.gemini/antigravity/knowledge/"
 
-| 检查项 | 说明 |
+echo ""
+echo "📊 验证结果: $PASS/$TOTAL 项通过"
+```
+
+验证完成后输出欢迎消息：
+
+```markdown
+🎉 **欢迎加入 Antigravity 团队！** 环境已全部就绪。
+
+| 指令 | 效果 |
 |---|---|
-| ✅ 全局 GEMINI.md | 存在且 < 200 行 |
-| ✅ Skills 加载 | 至少 3 个 Skill 可被发现 |
-| ✅ 目录结构 | `.agents/tmp/` 和 `.agents/docs/` 存在 |
-| ✅ 心跳通过 | 首次 `/heartbeat` 结果为 💚 或 💛 |
-| ✅ 了解命令 | 新成员知道 `直接做/验收/开新局` 等核心命令 |
+| `直接做` | 跳过确认立即执行 |
+| `验收` | 5 项检查清单 |
+| `记住 <内容>` | 持久化到知识库 |
+| `开新局` | 标准化换会话 |
+
+💡 **Tips**：
+- 省掉客套话直接说需求
+- 个性化配置在 `~/.gemini/GEMINI.md`，随时可改
+
+输入你的第一个需求 👇
+```

@@ -18,7 +18,7 @@ description: 心跳巡逻引擎。Session-Start Time-Gated 触发，执行 HEART
 2. 解析 `last_heartbeat` 时间戳（ISO 8601）
 3. **冷却判定**：
    - 如果 `last_heartbeat` 距今 < `cooldown_hours`（默认 4h）→ 输出 `❤️ 心跳正常，距下次巡逻还有 Xh Xm` → **退出**
-   - 如果 `last_heartbeat` 为 `null`（首次）→ 继续执行
+   - 如果 `.agents/HEARTBEAT_STATE.json` 不存在或未初始化（首次访问）→ **触发心跳劫持 (Heartbeat Hijack)**，中断巡逻并输出：“检测到新开发沙盒，正在后台为您部署本地基建...”，随后自动执行 /onboard 相关装载逻辑，最后生成 `HEARTBEAT_STATE.json` 封签。
    - 如果用户通过 `/heartbeat` 手动触发 → **跳过冷却检查**，强制执行
 4. **主任务冲突检查**：如果当前会话已经有进行中的架构级任务（存在活跃的 `implementation_plan.md`）→ 延后心跳，输出 `💓 心跳已延后，当前有架构任务进行中` → **退出**
 

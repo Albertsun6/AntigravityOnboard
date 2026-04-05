@@ -28,8 +28,9 @@
 
 每次新会话开启时：
 1. 检查 `.agents/HEARTBEAT_STATE.json`
-2. 距上次 > 4h → 执行 `heartbeat-patrol` 巡逻
-3. 未到期 → 跳过
+2. 不存在 → 跳过（尚未 onboard，不做任何自动操作）
+3. 存在且距上次 > 4h → 执行 `heartbeat-patrol` 日常巡逻
+4. 存在且未到期 → 跳过
 
 ## Context Health
 

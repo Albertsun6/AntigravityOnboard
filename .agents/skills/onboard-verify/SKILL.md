@@ -8,7 +8,7 @@ description: 团队 Onboarding 验证引擎。检查新成员的 GEMINI.md/Skill
 ## 核心触发点
 
 当以下任一条件满足时触发：
-1. `/onboard` Workflow 的 Step 7 中调用
+1. `/onboard` Workflow 的 Step 5 自动调用
 2. 用户说 "验证 onboarding" 或 "检查配置"
 
 ## 前置检查
@@ -24,6 +24,7 @@ description: 团队 Onboarding 验证引擎。检查新成员的 GEMINI.md/Skill
 | # | 检查项 | 验证方式 | 通过标准 |
 |---|---|---|---|
 | 1 | 全局 GEMINI.md 存在 | `ls ~/.gemini/GEMINI.md` | 文件存在 |
+| 1b | 占位符已替换 | `grep '{{YOUR_NAME}}' ~/.gemini/GEMINI.md` | 无匹配（占位符已被替换） |
 | 2 | GEMINI.md 行数 | `wc -l ~/.gemini/GEMINI.md` | ≤ 200 行 |
 | 3 | Skills 目录非空 | `ls .agents/skills/` | ≥ 3 个 Skill |
 | 4 | Skill descriptions 无冲突 | 遍历 SKILL.md frontmatter | 无重复 |

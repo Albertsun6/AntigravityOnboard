@@ -3,6 +3,7 @@
 
 # Antigravity internal
 .agents/tmp/
+.agents/HEARTBEAT_STATE.json
 
 # Python
 __pycache__/
