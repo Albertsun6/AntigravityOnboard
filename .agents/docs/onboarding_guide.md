@@ -15,7 +15,8 @@ Antigravity IDE （反重力环境）是一款集成了最核心 AI “大脑”
 - 🪟 **Windows (微软系统)**：支持 Windows 10/11。如果在后续用到高阶的自动化测试或编译流，我们会建议你安装 WSL2。但现在，仅日常运行无需操心。
 
 **2. 下载核心客户端** 
-👉 **点击此处获取 Google Antigravity 安装包：** `[内部云盘下载链接 / https://antigravity.google.com/download]`
+👉 **点击此处前往官网下载 Google Antigravity 安装包：** [https://antigravity.google.com/download](https://antigravity.google.com/download)
+
 
 下载后：
 - Mac 用户：双击 `dmg` 安装包，将图标拖拽进 `Applications (应用程序)` 文件夹即可。
