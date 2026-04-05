@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "last_promote": "2026-04-04T21:02:17+08:00",
+  "sessions_scanned": [
+    "de5c1f00-f594-49dc-8445-d09192fafd1c",
+    "2d53a652-40ee-41bf-b7c7-f8e62e07467f",
+    "30a398b1-8481-4076-8f87-6e249cd54ace",
+    "9a501ce6-df4e-4ab4-b69d-7a0ea51a6f27",
+    "4644b441-8ef1-4533-9cf3-30e2e195992b",
+    "787689ea-8fde-4759-9396-a0a67545d5f3",
+    "135664b0-e63c-44a5-b5c1-b4644b567aa2",
+    "1ce5188f-1c5b-4e0a-9664-6d52170f52fc",
+    "82b06e08-7adb-4e2e-9497-3ec33fc63227",
+    "b26427c4-22a6-4b4a-bbe3-e58ae81f062f",
+    "4721c087-95d2-4922-b3a1-ce8ed5386b04",
+    "cfb16228-36cd-4b99-a076-9b0ea07c5ab2",
+    "a798482e-3221-49ed-9ebf-48d3b261c268",
+    "8313b9be-3ab5-4a3d-89ab-2bd75a86dee1",
+    "2fe123de-d4f5-4594-865c-9bcbc5b152cc",
+    "a9b1ee97-3e64-43ff-89dd-7fa07555b849",
+    "8726f9c0-4281-4256-936d-a36688ac94c4",
+    "fe7b7077-12c4-446a-9b9a-a5228f84f632",
+    "2d161220-d70c-4e1b-bca5-f8d68cf6acd4",
+    "46e3ae35-ed75-465d-91f0-5a6626fd4154",
+    "2a6b5795-fd6a-44d7-ab24-f8fa26aa2bae",
+    "55ba1b27-9127-49f4-9689-5a4398f23d38",
+    "a0084f35-b8cd-4ea4-adaf-b52a1fccd880",
+    "87147a8d-5b74-43de-a6c0-1ed6f4648d3d",
+    "2fe123de-d4f5-4594-865c-9bcbc5b152cc",
+    "cfb16228-36cd-4b99-a076-9b0ea07c5ab2",
+    "f41982f7-f528-4b27-b307-3a343a7e617f",
+    "0072a826-6e0e-40b1-82f2-0d8bb82fd3ff"
+  ],
+  "items_promoted": 2,
+  "items_merged": 0,
+  "promote_history": [
+    {
+      "timestamp": "2026-04-04T21:02:17+08:00",
+      "sessions_scanned_count": 28,
+      "candidates_found": 5,
+      "promoted": 2,
+      "merged": 0,
+      "skipped": 3
+    }
+  ]
+}
