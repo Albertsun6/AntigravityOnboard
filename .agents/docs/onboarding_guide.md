@@ -24,17 +24,17 @@ Antigravity IDE （反重力环境）是一款集成了最核心 AI “大脑”
 
 ---
 
-## ⚙️ Step 2. 软体启动与初始秘钥配置
+## ⚙️ Step 2. 软体启动与账号登录
 
-首次双击打开这套 IDE 软件时，由于它的核心是一具空壳，我们需要赋予它“思考”与“连接团队”的特权。
+首次打开 Antigravity IDE 时，为了唤醒底层的全知大模型大脑，你需要通过团队身份进行验证。
 
-1. 在软件界面的最右下角，或是顶部菜单栏找到 **Settings/Preferences (偏好设置)** -> **Model Config (模型配置)**（根据你的软件版本可能叫 `API Key` 配置项）。
-2. 在弹出的密钥框内，**粘贴填入团队为你单发的专属 AI 秘钥锁**（如 Gemini / Claude 的 API 密语）。
+1. 在软件软件界面的左下角（或欢迎面板）找到 **账户图标 (Account)**，点击 **"Sign in with Google" (通过 Google 账号登录)**。
+2. 此时会自动跳转至电脑浏览器，请务必使用**你的团队 Google 工作账号**完成安全登录与授权。
 
-![图示1：在此处唤出设置并填入团队大底座 API Key 的区域](/Users/yongqian/Desktop/Antigravityknowhow/assets/tutorial_setup_api_key.png)
-> *(💡 注意：本截图为占位示意图，如需具体图解请参考内网论坛；如果你手上还没有这段秘钥字符串，请先停在此步，向团队管理员索要)*
+![图示1：在 IDE 界面的账户区域点击 Google 登录](/Users/yongqian/Desktop/Antigravityknowhow/assets/tutorial_setup_login.png)
+> *(💡 注意：本截图为占位示意图。请确认你使用的 Google 账号已被开通底层 Antigravity 权限。若登录受阻，马上滴滴团队管理员。)*
 
-3. 确认保存后，等待右侧对话提示窗或状态栏呈现 **绿灯连通标志 🟢**，说明大脑已被激活。
+3. 授权成功并切回 IDE 后，当你看到右侧边栏加载出了聊天对话框，或是状态栏呈现 **绿灯连通标志 🟢**，恭喜你，主脑已成功激活。
 
 ---
 
